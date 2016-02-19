@@ -1,0 +1,73 @@
+<% if session[:lender_id] %>
+<a href='/lenders/logout'>Logout</a>
+
+<p>Name: <%= @lender.first_name %> <%= @lender.last_name %></p>
+<p>Account Balance: <%= @lender.money %></p>
+
+<h3>List of people in need of help:</h3>
+<% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>
+<table>
+<tr>
+	<th>Name</th>
+	<th>Need money for</th>
+	<th>Reason for loan</th>
+	<th>Amount Needed</th>
+	<th>Amount Raised</th>
+	<th>Action</th>
+</tr>
+<% if @needy %>
+	<% @needy.each do |needer| %>
+	<tr>
+		<td><%= needer.first_name %> <%= needer.last_name %></td>
+		<td><%= needer.purpose %></td>
+		<td><%= needer.description %></td>
+		<td><%= needer.needed %></td>
+		<td><%= needer.raised %></td>
+		<td>
+			<form action='/loans/create' method='post'>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+				<input type='hidden' name='borrower_id' value='<%= needer.id %>'>
+				<input type='number' name='amount'>
+				<input type='submit' value='Lend'>
+			</form>
+		</td>
+	</tr>
+	<% end %>
+<% end %>
+</table>
+
+<h3>List of people you lent money to:</h3>
+<table>
+<tr>
+	<th>Name</th>
+	<th>Need money for</th>
+	<th>Reason for loan</th>
+	<th>Amount Needed</th>
+	<th>Amount Raised</th>
+	<th>Amount Lent</th>
+</tr>
+<% if @borrowers %>
+	<% @borrowers.each do |borrower| %>
+	<tr>
+		<td><%= borrower.first_name %> <%= borrower.last_name %></td>
+		<td><%= borrower.purpose %></td>
+		<td><%= borrower.description %></td>
+		<td><%= borrower.needed %></td>
+		<td><%= borrower.raised %></td>
+		<td>
+		<% total = 0 %>
+		<% @loans.each do |loan| %>
+			<% if loan.borrower_id == borrower.id %>
+				<% total += loan.amount %>
+			<% end %>
+		<% end %>
+		<%= total %>
+		</td>
+	</tr>
+	<% end %>
+<% end %>
+</table>
+
+<% end %>

@@ -1,0 +1,35 @@
+<% if session[:borrower_id] %>
+<a href='/borrowers/logout'>Logout</a>
+<p>Name: <%= @borrower.first_name %> <%= @borrower.last_name %></p>
+<p>Amount Needed: $<%= @borrower.needed %></p>
+<p>Amount Raised: $<%= @borrower.raised %></p>
+
+<h3>List of people who lent you money:</h3>
+
+<table>
+<tr>
+	<th>Name</th>
+	<th>Email</th>
+	<th>Amount Lent</th>
+</tr>
+<% if @borrower.lenders %>
+	<% @borrower.lenders.each do |lender| %>
+	<tr>
+		<td><%= lender.first_name %> <%= lender.last_name %></td>
+		<td><%= lender.email %></td>
+		<td>
+		<% total = 0 %>
+		<% @loans.each do |loan| %>
+			<% if loan.lender_id == lender.id %>
+				<% total += loan.amount %>
+			<% end %>
+		<% end %>
+		<%= total %>
+		</td>
+	</tr>
+	</tr>
+	<% end %>
+<% end %>
+</table>
+
+<% end %>

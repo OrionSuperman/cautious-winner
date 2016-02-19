@@ -1,0 +1,28 @@
+<h3><a href='/login'>Already a member?</a></h3>
+
+<h3>Sign up as a borrower</h3>
+<form action='/borrowers/create' method='post'>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<label for='first_name'>First Name</label><input type='text' name='borrower[first_name]' placeholder='First Name'>
+<label for='last_name'>Last Name</label><input type='text' name='borrower[last_name]' placeholder='Last Name'>
+<label for='email'>email</label><input type='text' name='borrower[email]' placeholder='email'>
+<label for='needed'>Money Needed</label><input type='number' name='borrower[needed]' placeholder='Money Needed'>
+<label for='purpose'>Purpose</label><input type='text' name='borrower[purpose]' placeholder='Purpose'>
+<label for='description'>Description</label><input type='text' name='borrower[description]' placeholder='Description'>
+<label for='password'>Password</label><input type='password' name='borrower[password]' placeholder='Password'>
+<label for='password_confirmation'>Confirm Password</label><input type='password' name='borrower[password_confirmation]' placeholder='Confirm Password'>
+<input type='submit' value='Register'>
+</form>
+
+<h3>Sign up as a Lender</h3>
+<form action='/lenders/create' method='post'>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<label for='first_name'>First Name</label><input type='text' name='lender[first_name]' placeholder='First Name'>
+<label for='last_name'>Last Name</label><input type='text' name='lender[last_name]' placeholder='Last Name'>
+<label for='email'>email</label><input type='text' name='lender[email]' placeholder='email'>
+<label for='money'>Money money</label><input type='number' name='lender[money]' placeholder='Money be rainin'>
+<label for='password'>Password</label><input type='password' name='lender[password]' placeholder='Password'>
+<label for='password_confirmation'>Confirm Password</label><input type='password' name='lender[password_confirmation]' placeholder='Confirm Password'>
+<input type='submit' value='Register'>
+</form>
+

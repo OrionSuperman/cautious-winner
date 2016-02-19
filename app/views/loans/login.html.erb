@@ -1,0 +1,19 @@
+<h3>Borrower login</h3>
+<form action='/borrowers/login' action='post'>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	<label for="email">Email Address</label>
+	<input type='text' name='email'>
+	<label for="password">Password</label>
+	<input type='password' name='password'>
+	<input type='submit' value='Login'>
+</form>
+
+<h3>Lender login</h3>
+<form action='/lenders/login' action='post'>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	<label for="email">Email Address</label>
+	<input type='text' name='email'>
+	<label for="password">Password</label>
+	<input type='password' name='password'>
+	<input type='submit' value='Login'>
+</form>
